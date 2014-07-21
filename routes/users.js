@@ -7,7 +7,16 @@ router.get('/register', function(req,res) {
 });
 
 router.post('/register', function(req,res) {
-        if (req.body.username != null)
+    req.assert('username', 'Username is required').notEmpty();
+    req.assert('email', 'Email is required!').notEmpty().isEmail();
+    req.assert('password', 'Password is required!').notEmpty();
+    req.assert('password_confirm', 'Password confirmation is required!').notEmpty();
+    var errors = req.validationError();
+    if (!errors) {
+        //TODO Passed validation, save the user then send a confirmation email
+    } else {
+        res.render('register', {title: 'Statik - Register', errors: errors});
+    }
 });
 
 router.get('/login', function(req,res) {

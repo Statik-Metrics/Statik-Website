@@ -28,6 +28,7 @@ db.once('open', function callback() {
 //User Schema
 var userSchema = new Schema({
     username: {type: String, required: true},
+    email: {type: String, required: true},
     password: {type: String, required: true},
     plugins: [ObjectId]
 });
@@ -156,6 +157,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(expressValidator);
+app.use(express.methodOverride());
 
 
 var routes = require('./routes/index');

@@ -1,0 +1,75 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+    link(rel='stylesheet', href='/stylesheets/smartadmin-production.min.css')
+    link(rel='stylesheet', href='/stylesheets/smartadmin-skins.min.css')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700')
+
+  body
+    div(id="header")
+        div(id="logo-group")
+            span(id="logo")
+                img(href="img/logo.png")
+            span.activity-dropdown(id="activity")
+                i.fa.fa-user
+                    b.badge 21
+            div.ajax-dropdown
+                div.btn-group.btn-group-justified(data-toggle="button")
+                    label.btn.btn-default
+                        input(type="radio", name="activity", id="ajax/notify/mail.html")
+                        | Msgs(14)
+                div.ajax-notifications.custom-scroll
+                    div.alert.alert-transparent
+                        h4
+                        | Click a button to show messages here
+                    i.fa.fa-lock.fa-4x.fa-border
+                span Last updated on 12/12/2013 9:43AM
+                    button.btn.btn-xs.btn-default.pull-right(data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading...")
+                        i.fa.fa-refresh
+        div.project-context.hidden-xs
+            span.label Projects:
+            span.project-selector.dropdown-toggle(data-toggle="dropdown") Recent Projects
+                i.fa.fa-angle-down
+            ul.dropdown-menu
+                li
+                    a(href="#") Online e-merchant management system
+                li
+                    a(href="#") Online e-merchant management system
+                li
+                    a(href="#") Online e-merchant management system
+                li.divider
+                li
+                    a(href="#") Online e-merchant management system
+        div.pull-right
+            div.btn-header.pull-right(id="hide-menu")
+                span
+                    a(href="#", data-action="toggleMenu", title="Collapse Menu")
+                        i.fa.fa-reorder
+            ul.header-dropdown-list.hidden-xs.padding-5(id="mobile-profile-img")
+                li(class="")
+                    a.dropdown-toggle.no-margin.userdropdown(href="#", data-toggle="dropdown")
+                        img.online(src="img/avatars/sunny.png", alt="John Doe")
+                    ul.dropdown-menu.pull-right
+                        li
+                            a.padding-10.padding-top-0.padding-bottom-0(href="#")
+                                li.fa.fa-cog
+                            | Settings
+    block content
+  script(src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")
+  script(src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js")
+  script(src="js/app.config.js")
+  script(src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js")
+  script(src="js/bootstrap/bootstrap.min.js")
+  script(src="js/notification/SmartNotification.min.js")
+  script(src="js/smartwidgets/jarvis.widget.min.js")
+  script(src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js")
+  script(src="js/plugin/sparkline/jquery.sparkline.min.js")
+  script(src="js/plugin/jquery-validate/jquery.validate.min.js")
+  script(src="js/plugin/masked-input/jquery.maskedinput.min.js")
+  script(src="js/plugin/select2/select2.min.js")
+  script(src="js/plugin/bootstrap-slider/bootstrap-slider.min.js")
+  script(src="js/plugin/msie-fix/jquery.mb.browser.min.js")
+  script(src="js/plugin/fastclick/fastclick.min.js")

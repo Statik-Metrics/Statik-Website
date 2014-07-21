@@ -1,0 +1,42 @@
+extends layout
+block title
+    | Statik - Plugin list
+block breadcrumb_title
+    li Home
+    li Plugins
+block content_title
+    |  Home
+    | &nbsp;
+    span > Plugins
+block content
+    .row
+        .col-md-4
+        article.col-xs-8.col-sm-8.col-md-12.col-lg-12
+            div.jarviswidget.jarviswidget-color-darken(id="plugin-graph", data-widget-editbutton="false")
+                header
+                    span.widget-icon
+                        i.fa.fa-table
+                    h2 Plugin List
+                div
+                    div.jarviswidget-editbox
+                    div.widget-body.no-padding
+                        table.table.table-striped.table-bordered.table-hover(width="100%", id="dt_basic")
+                            thead
+                                tr
+                                    th Rank
+                                    th Name
+                                    th Servers
+                            tbody
+                                each val, index in pluginList
+                                    tr
+                                        td #{val.rank} &nbsp;
+                                            if val.rank < val.lastRank
+                                                span.fa.fa-arrow-up
+                                            else if val.rank > val.lastRank
+                                                span.fa.fa-arrow-down
+                                        td
+                                            a(href="/plugins/#{val.pluginName}") #{val.pluginName}
+                                        if val.servers.length > 0
+                                            td #{val.servers.count}
+                                        else
+                                            td 0

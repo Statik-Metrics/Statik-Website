@@ -1,0 +1,341 @@
+doctype html
+html(lang='en-us')
+    head
+        meta(charset='utf-8')
+        // <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        title #{title}
+        meta(name='description', content='')
+        meta(name='author', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+        // Basic Styles
+        link(rel='stylesheet', type='text/css', media='screen', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', media='screen', href='/stylesheets/font-awesome.min.css')
+        // SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables
+        link(rel='stylesheet', type='text/css', media='screen', href='/stylesheets/smartadmin-production.min.css')
+        link(rel='stylesheet', type='text/css', media='screen', href='/stylesheets/smartadmin-skins.min.css')
+        //
+          SmartAdmin RTL Support is under construction
+          This RTL CSS will be released in version 1.5
+          <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/smartadmin-rtl.min.css">
+        //
+          We recommend you use "your_style.css" to override SmartAdmin
+          specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+          <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/your_style.css">
+        // Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp
+        link(rel='stylesheet', type='text/css', media='screen', href='/stylesheets/demo.min.css')
+        // FAVICONS
+        link(rel='shortcut icon', href='/img/favicon/favicon.ico', type='image/x-icon')
+        link(rel='icon', href='/img/favicon/favicon.ico', type='image/x-icon')
+        // GOOGLE FONT
+        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700')
+        //
+          Specifying a Webpage Icon for Web Clip
+          Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+        link(rel='apple-touch-icon', href='/img/splash/sptouch-icon-iphone.png')
+        link(rel='apple-touch-icon', sizes='76x76', href='/img/splash/touch-icon-ipad.png')
+        link(rel='apple-touch-icon', sizes='120x120', href='/img/splash/touch-icon-iphone-retina.png')
+        link(rel='apple-touch-icon', sizes='152x152', href='/img/splash/touch-icon-ipad-retina.png')
+        // iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance
+        meta(name='apple-mobile-web-app-capable', content='yes')
+        meta(name='apple-mobile-web-app-status-bar-style', content='black')
+        // Startup image for web apps
+        link(rel='apple-touch-startup-image', href='/img/splash/ipad-landscape.png', media='screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)')
+        link(rel='apple-touch-startup-image', href='/img/splash/ipad-portrait.png', media='screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)')
+        link(rel='apple-touch-startup-image', href='/img/splash/iphone.png', media='screen and (max-device-width: 320px)')
+    body
+        // possible classes: minified, fixed-ribbon, fixed-header, fixed-width
+        // HEADER
+        header#header
+            #logo-group
+                // PLACE YOUR LOGO HERE
+                span#logo
+                    img(src='/img/logo.png', alt='SmartAdmin')
+                // END LOGO PLACEHOLDER
+                //
+            // pulled right: nav area
+            .pull-right
+                // collapse menu button
+                #hide-menu.btn-header.pull-right
+                    span
+                        a(href='javascript:void(0);', data-action='toggleMenu', title='Collapse Menu')
+                            i.fa.fa-reorder
+                // end collapse menu
+                // #MOBILE
+                // Top menu profile link : this shows only when top menu is active
+                ul#mobile-profile-img.header-dropdown-list.hidden-xs.padding-5
+                    li
+                        a.dropdown-toggle.no-margin.userdropdown(href='#', data-toggle='dropdown')
+                            img.online(src='/img/avatars/sunny.png', alt='John Doe')
+                        ul.dropdown-menu.pull-right
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);')
+                                    i.fa.fa-cog
+                                    | Setting
+                            li.divider
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='profile.html')
+                                    i.fa.fa-user
+                                    u P
+                                    | rofile
+                            li.divider
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);', data-action='toggleShortcut')
+                                    i.fa.fa-arrow-down
+                                    u S
+                                    | hortcut
+                            li.divider
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);', data-action='launchFullscreen')
+                                    i.fa.fa-arrows-alt
+                                    | Full
+                                    u S
+                                    | creen
+                            li.divider
+                            li
+                                a.padding-10.padding-top-5.padding-bottom-5(href='login.html', data-action='userLogout')
+                                    i.fa.fa-sign-out.fa-lg
+                                    strong
+                                        u L
+                                        | ogout
+                // logout button
+                #logout.btn-header.transparent.pull-right
+                    span
+                        a(href='login.html', title='Sign Out', data-action='userLogout', data-logout-msg='You can improve your security further after logging out by closing this opened browser')
+                            i.fa.fa-sign-out
+                // end logout button
+                // search mobile button (this is hidden till mobile view port)
+                #search-mobile.btn-header.transparent.pull-right
+                    span
+                        a(href='javascript:void(0)', title='Search')
+                            i.fa.fa-search
+                // end search mobile button
+                // input: search field
+                form.header-search.pull-right(action='search.html')
+                    input#search-fld(type='text', name='param', placeholder='Find reports and more', data-autocomplete='[\
+                                                       "ActionScript",\
+                                                       "AppleScript",\
+                                                       "Asp",\
+                                                       "BASIC",\
+                                                       "C",\
+                                                       "C++",\
+                                                       "Clojure",\
+                                                       "COBOL",\
+                                                       "ColdFusion",\
+                                                       "Erlang",\
+                                                       "Fortran",\
+                                                       "Groovy",\
+                                                       "Haskell",\
+                                                       "Java",\
+                                                       "JavaScript",\
+                                                       "Lisp",\
+                                                       "Perl",\
+                                                       "PHP",\
+                                                       "Python",\
+                                                       "Ruby",\
+                                                       "Scala",\
+                                                       "Scheme"]')
+                    button(type='submit')
+                        i.fa.fa-search
+                    a#cancel-search-js(href='javascript:void(0);', title='Cancel Search')
+                        i.fa.fa-times
+                // end input: search field
+            // end pulled right: nav area
+        // END HEADER
+        // Left panel : Navigation area
+        // Note: This width of the aside area can be adjusted through LESS variables
+        aside#left-panel
+            // User info
+            .login-info
+                span
+                    // User image size is adjusted inside CSS, it should stay as it
+                    a#show-shortcut(href='javascript:void(0);', data-action='toggleShortcut')
+                        img.online(src='/img/avatars/sunny.png', alt='me')
+                        span
+                            | john.doe
+                        i.fa.fa-angle-down
+            // end user info
+            //
+              NAVIGATION : This navigation is also responsive
+              To make this navigation dynamic please make sure to link the node
+              (the reference to the nav > ul) after page load. Or the navigation
+              will not initialize.
+            nav
+                //
+                  NOTE: Notice the gaps after each icon usage <i></i>..
+                  Please note that these links work a bit different than
+                  traditional href="" links. See documentation for details.
+                ul
+                    li.active
+                        a(href='/', title='Dashboard')
+                            i.fa.fa-lg.fa-fw.fa-home
+                            span.menu-item-parent Homepage
+                    li
+                        a(href='/plugins')
+                            i.fa.fa-lg.fa-fw.fa-bars
+                            span.menu-item-parent Plugin List
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-bar-chart-o
+                            span.menu-item-parent Global Statistics
+                    li
+                        a(href='/login')
+                            i.fa.fa-lg.fa-fw.fa-table
+                            span.menu-item-parent Admin area
+            span.minifyme(data-action='minifyMenu')
+                i.fa.fa-arrow-circle-left.hit
+        // END NAVIGATION
+        // MAIN PANEL
+        #main(role='main')
+            // RIBBON
+            #ribbon
+                span.ribbon-button-alignment
+                    span#refresh.btn.btn-ribbon(data-action='resetWidgets', data-title='refresh', rel='tooltip', data-placement='bottom', data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.", data-html='true')
+                        i.fa.fa-refresh
+                // breadcrumb
+                ol.breadcrumb
+                    block breadcrumb_title
+                // end breadcrumb
+                //
+                  You can also add more buttons to the
+                  ribbon for further usability
+                  Example below:
+                  <span class="ribbon-button-alignment pull-right">
+                  <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+                  <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+                  <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+                  </span>
+            // END RIBBON
+            // MAIN CONTENT
+            #content
+                .row
+                    .col-xs-12.col-sm-7.col-md-7.col-lg-4
+                        h1.page-title.txt-color-blueDark
+                            i.fa-fw.fa.fa-home
+                            block content_title
+                block content
+            // END MAIN CONTENT
+        // END MAIN PANEL
+        // PAGE FOOTER
+        .page-footer
+            .row
+                .col-xs-12.col-sm-6
+                    span.txt-color-white PluginStats © 2014
+        // END PAGE FOOTER
+        //
+          SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+          Note: These tiles are completely responsive,
+          you can add as many as you like
+        #shortcut
+            ul
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-blue(href='#inbox.html')
+                        span.iconbox
+                            i.fa.fa-envelope.fa-4x
+                            span
+                                | Mail
+                                span.label.pull-right.bg-color-darken 14
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-orangeDark(href='#calendar.html')
+                        span.iconbox
+                            i.fa.fa-calendar.fa-4x
+                            span Calendar
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-purple(href='#gmap-xml.html')
+                        span.iconbox
+                            i.fa.fa-map-marker.fa-4x
+                            span Maps
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-blueDark(href='#invoice.html')
+                        span.iconbox
+                            i.fa.fa-book.fa-4x
+                            span
+                                | Invoice
+                                span.label.pull-right.bg-color-darken 99
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-greenLight(href='#gallery.html')
+                        span.iconbox
+                            i.fa.fa-picture-o.fa-4x
+                            span Gallery
+                li
+                    a.jarvismetro-tile.big-cubes.selected.bg-color-pinkDark(href='javascript:void(0);')
+                        span.iconbox
+                            i.fa.fa-user.fa-4x
+                            span My Profile
+        // END SHORTCUT AREA
+        // ==================================================
+        // PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        script(data-pace-options='{ "restartOnRequestAfter": true }', src='/js/plugin/pace/pace.min.js')
+        // Link to Google CDN's jQuery + jQueryUI; fall back to local
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+        script.
+          if (!window.jQuery) {
+          document.write('<script src="js/libs/jquery-2.0.2.min.js"><\\/script>');
+          }
+        script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+        script.
+          if (!window.jQuery.ui) {
+          document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\\/script>');
+          }
+        // IMPORTANT: APP CONFIG
+        script(src='/js/app.config.js')
+        // JS TOUCH : include this plugin for mobile drag / drop touch events
+        script(src='/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')
+        // BOOTSTRAP JS
+        script(src='/js/bootstrap/bootstrap.min.js')
+        // CUSTOM NOTIFICATION
+        script(src='/js/notification/SmartNotification.min.js')
+        // JARVIS WIDGETS
+        script(src='/js/smartwidgets/jarvis.widget.min.js')
+        // EASY PIE CHARTS
+        script(src='/js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js')
+        // SPARKLINES
+        script(src='/js/plugin/sparkline/jquery.sparkline.min.js')
+        // JQUERY VALIDATE
+        script(src='/js/plugin/jquery-validate/jquery.validate.min.js')
+        // JQUERY MASKED INPUT
+        script(src='/js/plugin/masked-input/jquery.maskedinput.min.js')
+        // JQUERY SELECT2 INPUT
+        script(src='/js/plugin/select2/select2.min.js')
+        // JQUERY UI + Bootstrap Slider
+        script(src='/js/plugin/bootstrap-slider/bootstrap-slider.min.js')
+        // browser msie issue fix
+        script(src='/js/plugin/msie-fix/jquery.mb.browser.min.js')
+        // FastClick: For mobile devices
+        script(src='/js/plugin/fastclick/fastclick.min.js')
+        //if IE 8
+          h1
+            | Your browser is out of date, please update your browser by going to www.microsoft.com/download
+        // Demo purpose only
+        script(src='/js/demo.min.js')
+        // MAIN APP JS FILE
+        script(src='/js/app.min.js')
+        // ENHANCEMENT PLUGINS : NOT A REQUIREMENT
+        // Voice command : plugin
+        script(src='/js/speech/voicecommand.min.js')
+        // PAGE RELATED PLUGIN(S)
+        // Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip
+        script(src='/js/plugin/flot/jquery.flot.cust.min.js')
+        script(src='/js/plugin/flot/jquery.flot.resize.min.js')
+        script(src='/js/plugin/flot/jquery.flot.tooltip.min.js')
+        // Vector Maps Plugin: Vectormap engine, Vectormap language
+        script(src='/js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js')
+        script(src='/js/plugin/vectormap/jquery-jvectormap-world-mill-en.js')
+        // Full Calendar
+        script(src='/js/plugin/fullcalendar/jquery.fullcalendar.min.js')
+        script.
+          $(document).ready(function() {
+          // DO NOT REMOVE : GLOBAL FUNCTIONS!
+          pageSetUp();
+        // Your GOOGLE ANALYTICS CODE Below
+        script(type='text/javascript').
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+          _gaq.push(['_trackPageview']);
+          (function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+          })();

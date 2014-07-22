@@ -4,6 +4,10 @@
 $header-height = 50px
 $sidebar-width = 220px
 
+$bg-header-footer = #444
+$bg-aside         = #333
+$bg-body          = #888
+
 /* ----------------------------------------------------------------------- */
 
 /* General  */
@@ -13,10 +17,12 @@ $sidebar-width = 220px
   box-sizing border-box
 
 body
+  background-color $bg-body
   font-family "Open Sans", sans-serif
 
 header
 footer
+  background-color $bg-header-footer
   width 100%
   padding 0 15px
   margin 0
@@ -35,6 +41,7 @@ footer
   padding-left $sidebar-width
 
 aside
+  background-color $bg-aside
   position fixed
   top 0
   left 0
@@ -43,7 +50,7 @@ aside
   min-height 100%
   z-index 1010
 
-nav.ui.vertical.menu
+nav.ui.vertical.inverted.menu
   width 100%
 
   &

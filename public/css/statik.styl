@@ -1,3 +1,5 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans");
+
 /* Variables */
 $header-height = 50px
 $sidebar-width = 220px
@@ -5,6 +7,9 @@ $sidebar-width = 220px
 /* ----------------------------------------------------------------------- */
 
 /* General  */
+body
+  font-family "Open Sans", sans-serif
+
 header
   position fixed
   top 0
@@ -14,18 +19,32 @@ header
 header
 footer
   width 100%
-  background-color yellow /* DEBUG */
+  padding 0 15px
+  margin 0
+  z-index 1020
+
+footer
+  margin-left $sidebar-width
 
 aside
   position fixed
   top 0
   left 0
-  padding-top &header-height
+  padding-top $header-height
   width $sidebar-width
   min-height 100%
-  background-color red /* DEBUG */
+  z-index 1010
+
+nav.ui.vertical.menu
+  width 100%
+
+  &
+  &>.item:first-child
+  &>.item:last-child
+    border-radius 0
 
 main
+  margin 0
   margin-top $header-height
   margin-left $sidebar-width
-  background-color blue /* DEBUG */
+  z-index 1000

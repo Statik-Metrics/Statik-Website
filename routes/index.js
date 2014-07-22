@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Plugin = mongoose.model('Plugin');
-var Server = mongoose.model('Server');
+var Plugin = require('../models/plugin');
+var Server = require('../models/server');
 var router = express.Router();
 
 /* GET home page. */

@@ -3,13 +3,17 @@ html
   head
     title Hello wolrd!
     block head
-  body
-    header
-      include header.jade
-    nav
-      include nav.jade
-    main
-      block content
-    footer
-      include footer.jade
+  body.ui.one.column.page.grid
+    .column
+      .row
+         header.ui.segment
+          include header.jade
+      .row
+        nav.ui.left.floated.vertical.menu
+          include nav.jade
+        main.ui.segment
+          block content
+      .row
+        footer.ui.segment
+          include footer.jade
 

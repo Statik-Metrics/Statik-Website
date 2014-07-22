@@ -1,9 +1,9 @@
 {
-  "name": "pluginstats",
+  "name": "statik-website",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./server.js"
   },
   "dependencies": {
     "bcrypt": "^0.7.8",
@@ -24,3 +24,4 @@
     "static-favicon": "~1.0.0"
   }
 }
+

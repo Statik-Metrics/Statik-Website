@@ -1,8 +1,5 @@
-var express = require("express");
-var app = require("./app.js");
-
-var port = process.env.PORT || 8080;
-
-app.listen(port);
-console.log("Statik Website started on port " + port);
+console.log("Starting Statik Website...");
+require("./app.js").listen(process.env.PORT || 3000, function() {
+    console.log("Statik Website listening on port " + port + "!");
+});
 

@@ -55,10 +55,10 @@ app.use(passport.session());
 var log = process.env.LOG || false;
 if (log) {
     var logFile = fs.createWriteStream(log, {flags: 'w'});
-    app.use('dev', ({stream: logFile}));
+    app.use(logger('dev', ({stream: logFile})));
     console.log("Using " + log + " for logging");
 } else {
-    app.use('dev');
+    app.use(logger('dev'));
     console.log("Using stdout for logging");
 }
 

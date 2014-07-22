@@ -10,6 +10,9 @@ var passport = require('passport'),
 var mongoose = require('mongoose');
 var session = require('express-session');
 var validator = require('express-validator');
+var methodOverride = require('method-override');
+var Mailgun = require('mailgun').Mailgun;
+var mg = new Mailgun(process.env.MAILGUN_API_KEY);
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var Mixed = mongoose.Schema.Types.Mixed;
@@ -27,9 +30,11 @@ db.once('open', function callback() {
 
 //User Schema
 var userSchema = new Schema({
-    username: {type: String, required: true},
+    username: {type: String, required: true, index: {unique: true}},
     email: {type: String, required: true},
     password: {type: String, required: true},
+    resetKey: {type: String, required: true},
+    enabled: {type: Boolean, default: false, required: true},
     plugins: [ObjectId]
 });
 
@@ -157,8 +162,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(expressValidator);
-app.use(express.methodOverride());
+app.use(validator);
+app.use(methodOverride());
 
 
 var routes = require('./routes/index');

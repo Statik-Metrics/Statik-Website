@@ -1,4 +1,5 @@
 var express = require('express');
+var stylus = require('stylus');
 var path = require('path');
 var fs = require('fs');
 var favicon = require('static-favicon');
@@ -14,9 +15,8 @@ var Mailgun = require('mailgun').Mailgun;
 var mg = new Mailgun(process.env.MAILGUN_API_KEY);
 var app = express();
 
-var mongoUri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
+// Database initialization
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('error', function(err) {
@@ -50,8 +50,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(stylus.middleware(path.join(__dirname, 'public')));
 
 // Log to file if required
+// TODO Redirect _everything_ to the file. For now console.log is on stdout
 var log = process.env.LOG || false;
 if (log) {
     var logFile = fs.createWriteStream(log, {flags: 'w'});
@@ -110,3 +112,4 @@ function ensureAuthenticated(req, res, next) {
 }
 
 module.exports = app;
+

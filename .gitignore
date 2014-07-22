@@ -2,7 +2,7 @@
 workspace.xml
 newrelic.js
 *.iml
-
+node_modules
 
 #########
 MANIFEST.MF

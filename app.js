@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var fs = require('fs');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -41,7 +42,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon());
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(validator());
@@ -50,6 +50,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Log to file if required
+var log = process.env.LOG || false;
+if (log) {
+    var logFile = fs.createWriteStream(log, {flags: 'w'});
+    app.use('dev', ({stream: logFile}));
+    console.log("Using " + log + " for logging");
+} else {
+    app.use('dev');
+    console.log("Using stdout for logging");
+}
+
 
 //We load the routes
 app.use('/', require('./routes/index'));

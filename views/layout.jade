@@ -3,9 +3,11 @@ html
   head
     title Hello wolrd!
 
-    style(
-      type = "text/css"
-      src  = "/css/semantic.min.css"
+    link(
+      rel   = "stylesheet"
+      type  = "text/css"
+      href  = "/css/semantic.min.css"
+      media = "all"
     )
 
     block head
@@ -24,12 +26,10 @@ html
           include footer.jade
 
     script(
-      type = "text/javascript"
-      src  = "/javascript/jquery-2.1.1.min.js"
+      src = "/javascript/jquery-2.1.1.min.js"
     )
 
     script(
-      type = "text/javascript"
-      src  = "/javascript/semantic.min.js"
+      src = "/javascript/semantic.min.js"
     )
 

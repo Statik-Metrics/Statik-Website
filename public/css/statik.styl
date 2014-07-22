@@ -1,0 +1,31 @@
+/* Variables */
+$header-height = 50px
+$sidebar-width = 220px
+
+/* ----------------------------------------------------------------------- */
+
+/* General  */
+header
+  position fixed
+  top 0
+  left 0
+  height $header-height
+
+header
+footer
+  width 100%
+  background-color yellow /* DEBUG */
+
+aside
+  position fixed
+  top 0
+  left 0
+  padding-top &header-height
+  width $sidebar-width
+  min-height 100%
+  background-color red /* DEBUG */
+
+main
+  margin-top $header-height
+  margin-left $sidebar-width
+  background-color blue /* DEBUG */

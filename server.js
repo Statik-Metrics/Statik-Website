@@ -1,5 +1,6 @@
 console.log("Starting Statik Website...");
-require("./app.js").listen(process.env.PORT || 3000, function() {
+var port = process.env.PORT || 3000;
+require("./app.js").listen(port, function() {
     console.log("Statik Website listening on port " + port + "!");
 });
 

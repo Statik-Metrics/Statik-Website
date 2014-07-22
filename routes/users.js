@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var app = require('../app');
 var Chance = require('chance'),
     chance = new Chance();
+
 
 router.get('/register', function(req,res) {
    res.render('register', {title: 'Statik - Register'});

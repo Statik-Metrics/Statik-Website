@@ -10,7 +10,6 @@ var passport = require('passport'),
 var mongoose = require('mongoose');
 var session = require('express-session');
 var validator = require('express-validator');
-var methodOverride = require('method-override');
 var Mailgun = require('mailgun').Mailgun;
 var mg = new Mailgun(process.env.MAILGUN_API_KEY);
 var Schema = mongoose.Schema;
@@ -157,13 +156,12 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(validator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(validator);
-app.use(methodOverride());
 
 
 var routes = require('./routes/index');

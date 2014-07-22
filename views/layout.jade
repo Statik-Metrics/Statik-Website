@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Hello wolrd!
+    title Hello world!
 
     link(
       rel   = "stylesheet"
@@ -10,20 +10,24 @@ html
       media = "all"
     )
 
+    link(
+      rel   = "stylesheet"
+      type  = "text/css"
+      href  = "/css/statik.css"
+      media = "all"
+    )
+
     block head
-  body.ui.one.column.page.grid
-    .column
-      .row
-         header.ui.segment
-          include header.jade
-      .row
-        nav.ui.left.floated.vertical.menu
-          include nav.jade
-        main.ui.segment
-          block content
-      .row
-        footer.ui.segment
-          include footer.jade
+  body
+    header
+      include header.jade
+    aside
+      nav.ui.vertical.menu
+        include nav.jade
+    main
+      block content
+    footer
+      include footer.jade
 
     script(
       src = "/javascript/jquery-2.1.1.min.js"

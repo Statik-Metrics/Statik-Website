@@ -3,15 +3,12 @@ html
   head
     title Hello wolrd!
     block head
-    // [if lte IE 9]
-    script(type="text/javascript",src="/js/html5shiv.min.js")
-    // [endif]
   body
     header
       include header.jade
     nav
       include nav.jade
-    section#content
+    main
       block content
     footer
       include footer.jade

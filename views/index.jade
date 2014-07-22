@@ -1,21 +1,26 @@
 extends layout
 block title
     |Statik
-block breadcrumb_title
-    li Home
-block content_title
-    |  Home
 block content
+    h2
+        | Statik
+        br
+        small
+            | The system info collector for &nbsp;
+            a(href='http://bukkit.org/', target='_blank') Bukkit
+            |  plugins.
+    hr
     .row
-        .col-md-4
-        .col-md-4
-          h1 #{title}
-          p Welcome to #{title}
-          p We currently have #{numberOfPlugins} plugins registered and tracking #{numberOfServers} server(s)!
-          a.btn.btn-primary(href="/info")
-            span.glyphicon.glyphicon-info-sign
-            |&nbsp;Learn More
-          &nbsp;
-          a.btn.btn-success(href="/plugins")
-            span.glyphicon.glyphicon-list
-            |&nbsp;Plugin List
+        .col-lg-12
+            p
+                | Statik is a statistic collection system for Bukkit plugins, actively used by
+                strong #{numberOfPlugins}
+                |  plugins and counting.
+            p
+                | In the last
+                strong {TIME}
+                | from countries across the globe over
+                strong {PLAYERS}
+                | have been seen playing on over
+                strong #{numberOfServers}
+                | servers.

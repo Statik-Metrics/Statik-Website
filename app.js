@@ -46,11 +46,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(validator());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public/static')));
 app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(stylus.middleware(path.join(__dirname, 'public/css')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Log to file if required
 // TODO Redirect _everything_ to the file. For now console.log is on stdout

@@ -41,7 +41,8 @@ var User = require('./models/user');
 passport.use(new GitHubStrategy({
         clientID: GITHUB_CLIENTID,
         clientSecret: GITHUB_CLIENTSECRET,
-        callbackURL: "http://dev.statik.io/users/login/github/callback" //TODO: Make that a legit URL
+        callbackURL: "http://dev.statik.io/users/login/github/callback", //TODO: Make that a legit URL
+        scope: 'user:email'
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({ githubId: profile.id }, function (err, user) {

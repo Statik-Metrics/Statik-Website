@@ -6,10 +6,9 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema({
     email: {type: String, required: true},
     resetKey: {type: String, required: true},
-    enabled: {type: Boolean, default: false, required: true},
+    enabled: {type: Boolean, default: false},
     plugins: [String],
-    isMod: {type: Boolean, default: false},
-    isAdmin: {type: Boolean, default: false},
+    group: {type: String, default: 'user'},
     githubId: {type: Number}
 });
 

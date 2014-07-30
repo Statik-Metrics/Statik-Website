@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 var session = require('express-session');
 var validator = require('express-validator');
@@ -14,9 +15,15 @@ var Mailgun = require('mailgun').Mailgun;
 var mg = new Mailgun(process.env.MAILGUN_API_KEY);
 var app = express();
 
+//Github oAuth values
+var GITHUB_CLIENTID = process.env.GITHUB_CLIENTID ||
+    '2e89yc2'; //Fake value
+var GITHUB_CLIENTSECRET = process.env.GITHUB_CLIENTSECRET ||
+    '2390fyhowebcs'; //fake value
 var mongoUri = process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://localhost/test';
+
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('error', function(err) {
@@ -29,6 +36,19 @@ db.once('open', function callback() {
 
 //We initialize user saving
 var User = require('./models/user');
+
+//Github auth support
+passport.use(new GitHubStrategy({
+        clientID: GITHUB_CLIENTID,
+        clientSecret: GITHUB_CLIENTSECRET,
+        callbackURL: "http://dev.statik.io/users/login/github/callback" //TODO: Make that a legit URL
+    },
+    function(accessToken, refreshToken, profile, done) {
+        User.findOrCreate({ githubId: profile.id }, function (err, user) {
+            return done(err, user);
+        });
+    }
+));
 
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));

@@ -7,7 +7,10 @@ var userSchema = new Schema({
     email: {type: String, required: true},
     resetKey: {type: String, required: true},
     enabled: {type: Boolean, default: false, required: true},
-    plugins: [ObjectId]
+    plugins: [String],
+    isMod: {type: Boolean, default: false},
+    isAdmin: {type: Boolean, default: false},
+    githubId: {type: Number}
 });
 
 userSchema.plugin(passportLocalMongoose);

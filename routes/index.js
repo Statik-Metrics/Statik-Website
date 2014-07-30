@@ -1,17 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Plugin = require('../models/plugin');
-var Server = require('../models/server');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    Plugin.count({}, function(err, c) {
-        console.log(c);
-        Server.count({}, function(err, serverCount) {
-            res.render('index', { title: 'Statik', numberOfPlugins: c, numberOfServers: serverCount });
-        });
-    });
+    res.render('index', { title: 'Statik', numberOfPlugins: 932, numberOfServers: 150 }); //TODO : Valid numbers when the API is built
 });
 
 router.get('/info', function(req, res) {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = require('../app');
+var passport = require('passport');
 var Chance = require('chance'),
     chance = new Chance();
 
@@ -51,6 +52,13 @@ router.post('/login', function(req,res) {
         failureRedirect: '/login',
         failureFlash: 'true'
     });
+});
+
+router.get('/login/github', passport.authenticate('github'));
+
+router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login'}), function(req,res) {
+    //Auth success
+    res.redirect('/');
 });
 
 module.exports = router;

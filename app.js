@@ -45,7 +45,14 @@ passport.use(new GitHubStrategy({
         scope: 'user:email'
     },
     function(accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ githubId: profile.id }, function (err, user) {
+        User.findOne({githubId: profile.id}, function (err, user) {
+            if (!user) {
+              user = new User({ email: profile.emails[0].value, githubId: profile.id });
+              user.save();
+            } else {
+                user.email = profile.emails[0].value;
+                user.save();
+            };
             return done(err, user);
         });
     }

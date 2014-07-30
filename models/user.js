@@ -5,11 +5,11 @@ var mongoose = require('mongoose'),
 
 var userSchema = new Schema({
     email: {type: String, required: true},
-    resetKey: {type: String, required: true},
+    resetKey: {type: String, required: false},
     enabled: {type: Boolean, default: false},
     plugins: [String],
     group: {type: String, default: 'user'},
-    githubId: {type: Number}
+    githubId: {type: Number, required: false}
 });
 
 userSchema.plugin(passportLocalMongoose);

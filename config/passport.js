@@ -50,7 +50,7 @@ module.exports = function(passport) {
                     user.github.token = accessToken;
                     user.github.name = profile.displayName;
                     user.github.email = profile.emails[0].value;
-
+                    user.enabled = true;
                     user.save(function (err) {
                         if (err) throw err;
                         return done(null, user);
@@ -108,7 +108,7 @@ module.exports = function(passport) {
                     user.google.token = accessToken;
                     user.google.name = profile.displayName;
                     user.google.email = profile.emails[0].value;
-
+                    user.enabled = true;
                     user.save(function (err) {
                         if (err) throw err;
                         return done(null, user);
@@ -152,7 +152,7 @@ module.exports = function(passport) {
                     user.bitbucket.token = accessToken;
                     user.bitbucket.name = profile.displayName;
                     user.bitbucket.email = profile.emails[0].value;
-
+                    user.enabled = true;
                     user.save(function (err) {
                         if (err) throw err;
                         return done(null, user);

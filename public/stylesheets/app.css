@@ -285,6 +285,7 @@ body {
   z-index: 11;
 }
 .navbar-top .navbar-header .navbar-brand {
+  color: #ecf0f1;
   font-size: 220%;
   font-family: 'Candy Script';
 }

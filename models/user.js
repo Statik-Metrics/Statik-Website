@@ -8,7 +8,6 @@ var userSchema = new Schema({
     selectedEmail: {type: String }, //This is to select where we want to send informational emails
     enabled: {type: Boolean, default: false},
     local: {
-        username: {type: String},
         email: {type: String},
         password: {type: String},
         resetKey: {type: String}

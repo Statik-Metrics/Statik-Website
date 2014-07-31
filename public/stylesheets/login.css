@@ -18,7 +18,8 @@
   padding: 10px 20px;
   background-color: white;
 }
-.eternity-form .section-title h3 {
+.eternity-form .section-title h3,
+.eternity-form h4{
   color: #3498db;
 }
 .eternity-form .textbox-wrap {

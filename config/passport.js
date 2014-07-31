@@ -63,7 +63,13 @@ module.exports = function(passport) {
                             if (err) throw err;
                         });
                     }
-                    request('https://api.github.com/user/emails?access_token=' + accessToken, function (error, response, body) {
+                    var options = {
+                        url: 'https://api.github.com/user/emails?access_token=' + accessToken,
+                        headers: {
+                            'User-Agent': 'statik-website'
+                        }
+                    };
+                    request(options, function (error, response, body) {
                         if (!error && response.statusCode == 200) {
                             var json = JSON.parse(body);
                             json.forEach(function(entry) {

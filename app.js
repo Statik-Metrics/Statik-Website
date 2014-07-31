@@ -5,26 +5,19 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 var session = require('express-session');
 var validator = require('express-validator');
+var flash = require('connect-flash');
+var passport = require('passport');
+var configuration = require('./config/config.js');
+//Email setup
 var Mailgun = require('mailgun').Mailgun;
 var mg = new Mailgun(process.env.MAILGUN_API_KEY);
+
+
 var app = express();
-
-//Github oAuth values
-var GITHUB_CLIENTID = process.env.GITHUB_CLIENTID ||
-    '2e89yc2'; //Fake value
-var GITHUB_CLIENTSECRET = process.env.GITHUB_CLIENTSECRET ||
-    '2390fyhowebcs'; //fake value
-var mongoUri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
-
-mongoose.connect(mongoUri);
+mongoose.connect(configuration.mongoUri);
 var db = mongoose.connection;
 db.on('error', function(err) {
     console.log(err);
@@ -34,36 +27,8 @@ db.once('open', function callback() {
     console.log('Connected to DB');
 });
 
-//We initialize user saving
-var User = require('./models/user');
+require('./config/passport')(passport); // pass passport for configuration
 
-//Github auth support
-passport.use(new GitHubStrategy({
-        clientID: GITHUB_CLIENTID,
-        clientSecret: GITHUB_CLIENTSECRET,
-        callbackURL: "http://dev.statik.io/users/login/github/callback", //TODO: Make that a legit URL
-        scope: 'user:email'
-    },
-    function(accessToken, refreshToken, profile, done) {
-        User.findOne({githubId: profile.id}, function (err, user) {
-            if (!user) {
-              user = new User({ email: profile.emails[0].value, githubId: profile.id });
-              user.save();
-            } else {
-                user.email = profile.emails[0].value;
-                user.save();
-            };
-            return done(err, user);
-        });
-    }
-));
-
-// use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(User.authenticate()));
-
-// use static serialize and deserialize of model for passport session support
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -75,9 +40,10 @@ app.use(bodyParser.urlencoded());
 app.use(validator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session( { secret: '9208efyg98wgc987stdc97sgdc'}));
+app.use(session( { secret: configuration.COOKIE_KEY}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 // Log to file if required
 var log = process.env.LOG || false;

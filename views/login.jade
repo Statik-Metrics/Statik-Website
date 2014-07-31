@@ -1,13 +1,14 @@
 doctype html
 html(xmlns='http://www.w3.org/1999/xhtml')
   head
-    title Statik Login
+    title Login - Statik
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(href='/stylesheets/login.css', rel='stylesheet')
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/app.css')
     link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', rel='stylesheet')
     link(href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css', rel='stylesheet')
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,300', rel='stylesheet')
     script(src='http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js')
   body.eternity-form(style='background-color:#1d1d1d')
     section(data-panel='first', style='padding-top:50px')
@@ -16,13 +17,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           .login-content
             form
               .section-title
-                h3 Login to continue
-                br
+                h3 Statik - Login
+              hr
                 p
-                  span.pull-left
-                    a.btn.btn-link(href='#') Forgot Password
-                  span.pull-right
-                    a.btn.btn-link(href='#') Register
+                  a(href='#')
+                    span.pull-left.text-muted Forgot Password
+                  a(href='#')
+                    span.pull-left.text-muted Register
               hr
               .textbox-wrap
                 .input-group
@@ -43,7 +44,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             hr
             a.btn.btn-danger.btn-block(href='/users/login/google')
               .row
-                .col-md-2.col-md-offset-1
+                .col-md-1.col-md-offset-1
                   span.fa.fa-google
                 .col-md-8
                   | Google

@@ -62,6 +62,10 @@ router.post('/login', function(req,res) {
     });
 });
 
+router.get('/passwordreset', function(req,res) {
+   res.render('passwordreset');
+});
+
 router.get('/login/github', passport.authenticate('github'));
 
 router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login'}), function(req,res) {

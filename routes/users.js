@@ -6,11 +6,11 @@ var Chance = require('chance'),
     chance = new Chance();
 
 
-router.get('/register', function(req,res) {
-   res.render('register', {title: 'Statik - Register'});
+router.get('/signup', function(req,res) {
+   res.render('signup', {title: 'Statik - Register'});
 });
 
-router.post('/register', function(req,res) {
+router.post('/signup', function(req,res) {
     req.assert('username', 'Username is required').notEmpty();
     req.assert('email', 'Email is required!').notEmpty().isEmail();
     req.assert('password', 'Password is required!').notEmpty();
@@ -27,13 +27,13 @@ router.post('/register', function(req,res) {
             resetKey: randomGUID
         });
         user.save(function (err) {
-            if (err) return res.render('register', {title: 'Statik - Register', errors: err});
+            if (err) return res.render('signup', {title: 'Statik - Register', errors: err});
             mg.sendText('noreply@statik.io', req.body.email, 'Password confirmation',
                     "Welcome to Statik.io! \n" +
                     "To confirm your account, please click this link: http://statik.io/users/confirm/" +randomGUID +
                     "\n\n" +
                     "Statik.io Staff", function (err) {
-                    if (err) return res.render('register', {title: 'Statik - Register', errors: err});
+                    if (err) return res.render('signup', {title: 'Statik - Register', errors: err});
                     redirect('/');
                 });
         })

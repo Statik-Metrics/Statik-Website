@@ -61,4 +61,11 @@ router.get('/login/github/callback', passport.authenticate('github', { failureRe
     res.redirect('/');
 });
 
+router.get('/login/google', passport.authenticate('google'));
+
+router.get('/login/google/callback', passport.authenticate('google', { failureReditect: '/login'}), function(req,res) {
+    //Auth success
+    res.redirect('/');
+});
+
 module.exports = router;

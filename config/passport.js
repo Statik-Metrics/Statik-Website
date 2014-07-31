@@ -2,7 +2,8 @@ var configuration = require('./config');
 
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    GitHubStrategy = require('passport-github').Strategy;
+    GitHubStrategy = require('passport-github').Strategy,
+    GoogleStrategy = require('passport-google-oauth').OAuthStrategy;;
 
 var User = require('../models/user');
 
@@ -62,6 +63,52 @@ module.exports = function(passport) {
                     //We check if we had a empty email. If empty, let's set it to a possible new value
                     if (user.github.email == null || user.github.email != profile.emails[0].value) {
                         user.github.email = profile.emails[0].value;
+                        user.save(function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                    done(null, user);
+                }
+            });
+        }
+    ));
+
+    // =========================================================================
+    // Google SIGNUP ===========================================================
+    // =========================================================================
+
+    passport.use(new GoogleStrategy({
+            consumerKey: configuration.google.consumerKey,
+            consumerSecret: configuration.google.consumerSecret,
+            callbackURL: "http://dev.statik.io/users/login/google/callback", //TODO: Make that a legit URL
+            scope: 'email'
+        },
+        function (accessToken, refreshToken, profile, done) {
+            User.findOne({'google.id': profile.id}, function (err, user) {
+                if (err) return done(err);
+
+                if (!user) {
+                    user = new User();
+                    user.google.id = profile.id;
+                    user.google.token = accessToken;
+                    user.google.name = profile.displayName;
+                    user.google.email = profile.emails[0].value;
+
+                    user.save(function (err) {
+                        if (err) throw err;
+                        return done(null, user);
+                    });
+                } else {
+                    //If the token is different, let's change it!
+                    if (user.google.token != accessToken) {
+                        user.google.token = accessToken;
+                        user.save(function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                    //We check if we had a empty email. If empty, let's set it to a possible new value
+                    if (user.google.email == null || user.google.email != profile.emails[0].value) {
+                        user.google.email = profile.emails[0].value;
                         user.save(function (err) {
                             if (err) throw err;
                         });

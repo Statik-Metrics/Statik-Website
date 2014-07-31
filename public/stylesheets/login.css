@@ -98,3 +98,17 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   background-color: white;
 }
+
+.eternity-form h1,
+.eternity-form h2,
+.eternity-form h3,
+.eternity-form h4,
+.eternity-form h5,
+.eternity-form h6 {
+  font-family: 'Roboto', 'PT Sans', sans-serif;
+  font-weight: 300;
+}
+
+.registration-body{
+  background-color:white;
+}

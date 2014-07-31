@@ -8,6 +8,9 @@ var passport = require('passport'),
 
 var request = require('request');
 
+var Chance = require('chance'),
+    chance = new Chance();
+
 var User = require('../models/user');
 
 // expose this function to our app using module.exports
@@ -233,7 +236,7 @@ module.exports = function(passport) {
                         // set the user's local credentials
                         newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
-
+                        newUser.local.resetKey = chance.guid();
                         // save the user
                         newUser.save(function (err) {
                             if (err)

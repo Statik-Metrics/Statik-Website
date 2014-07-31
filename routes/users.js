@@ -7,8 +7,16 @@ var Chance = require('chance'),
 
 
 router.get('/signup', function(req,res) {
-   res.render('signup', {title: 'Statik - Register'});
+   res.render('signup');
 });
+
+
+// process the signup form
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/', // redirect to the secure profile section
+    failureRedirect : '/signup', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}));
 
 router.post('/signup', function(req,res) {
     req.assert('username', 'Username is required').notEmpty();

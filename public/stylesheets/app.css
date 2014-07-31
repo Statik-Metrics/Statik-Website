@@ -127,7 +127,7 @@ fieldset .form-group {
   border: 0;
 }
 .nav li > a {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 .nav.nav-pills .active > a {
   background-color: #3498db !important;
@@ -285,7 +285,6 @@ body {
   z-index: 11;
 }
 .navbar-top .navbar-header .navbar-brand {
-  color: #ecf0f1;
   font-size: 220%;
   font-family: 'Candy Script';
 }
@@ -301,8 +300,7 @@ body {
 .navbar-top .navbar-nav > .open > a:hover,
 .navbar-top .navbar-nav > .active > a:focus,
 .navbar-top .navbar-nav > .open > a:focus {
-  background-color: #fff;
-  background-color: transparent;
+  background-color: #333;
 }
 .navbar-top [data-toggle='navbar-search'] {
   position: absolute;

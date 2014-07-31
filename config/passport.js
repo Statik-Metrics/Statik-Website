@@ -78,10 +78,10 @@ module.exports = function(passport) {
     // =========================================================================
 
     passport.use(new GoogleStrategy({
-            consumerKey: configuration.google.consumerKey,
-            consumerSecret: configuration.google.consumerSecret,
+            clientID: configuration.google.consumerKey,
+            clientSecret: configuration.google.consumerSecret,
             callbackURL: "http://dev.statik.io/users/login/google/callback", //TODO: Make that a legit URL
-            scope: 'email'
+            scope: ['profile', 'email']
         },
         function (accessToken, refreshToken, profile, done) {
             User.findOne({'google.id': profile.id}, function (err, user) {

@@ -3,7 +3,7 @@ var configuration = require('./config');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     GitHubStrategy = require('passport-github').Strategy,
-    GoogleStrategy = require('passport-google-oauth').OAuthStrategy;;
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;;
 
 var User = require('../models/user');
 

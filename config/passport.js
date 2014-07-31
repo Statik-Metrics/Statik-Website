@@ -43,7 +43,7 @@ module.exports = function(passport) {
                 if (!user) {
                     user = new User();
                     user.github.id = profile.id;
-                    user.github.token = token;
+                    user.github.token = accessToken;
                     user.github.name = profile.displayName;
                     user.github.email = profile.emails[0].value;
 

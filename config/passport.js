@@ -49,11 +49,29 @@ module.exports = function(passport) {
                     user.github.id = profile.id;
                     user.github.token = accessToken;
                     user.github.name = profile.displayName;
-                    user.github.email = profile.emails[0].value;
                     user.enabled = true;
                     user.save(function (err) {
                         if (err) throw err;
                         return done(null, user);
+                    });
+                    var options = {
+                        url: 'https://api.github.com/user/emails?access_token=' + accessToken,
+                        headers: {
+                            'User-Agent': 'statik-website'
+                        }
+                    };
+                    request(options, function (error, response, body) {
+                        if (!error && response.statusCode == 200) {
+                            var json = JSON.parse(body);
+                            json.forEach(function(entry) {
+                                if (entry.primary) {
+                                    user.github.email = entry.email;
+                                    user.save(function (err) {
+                                        if (err) throw err;
+                                    });
+                                }
+                            });
+                        };
                     });
                 } else {
                     //If the token is different, let's change it!

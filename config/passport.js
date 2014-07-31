@@ -52,6 +52,20 @@ module.exports = function(passport) {
                         return done(null, user);
                     });
                 } else {
+                    //If the token is different, let's change it!
+                    if (user.github.token != accessToken) {
+                        user.github.token = accessToken;
+                        user.save(function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                    //We check if we had a empty email. If empty, let's set it to a possible new value
+                    if (user.github.email == null || user.github.email != profile.emails[0].value) {
+                        user.github.email = profile.emails[0].value;
+                        user.save(function (err) {
+                            if (err) throw err;
+                        });
+                    }
                     done(null, user);
                 }
             });

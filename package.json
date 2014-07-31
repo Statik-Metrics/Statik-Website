@@ -20,6 +20,7 @@
     "mongoose": "^3.8.13",
     "morgan": "~1.0.0",
     "passport": "^0.2.0",
+    "passport-bitbucket": "git+https://github.com/SamyPesse/passport-bitbucket.git",
     "passport-github": "^0.1.5",
     "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",

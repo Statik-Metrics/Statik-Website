@@ -120,6 +120,50 @@ module.exports = function(passport) {
     ));
 
     // =========================================================================
+    // Bitbucket SIGNUP ===========================================================
+    // =========================================================================
+    passport.use(new BitbucketStrategy({
+            consumerKey: configuration.bitbucket.clientID,
+            consumerSecret: configuration.bitbucket.clientSecret,
+            callbackURL: "http://dev.statik.io/users/login/bitbucket/callback"
+        },
+        function(accessToken, tokenSecret, profile, done) {
+            User.findOne({'bitbucket.id': profile.username}, function (err, user) {
+                if (err) return done(err);
+
+                if (!user) {
+                    user = new User();
+                    user.bitbucket.id = profile.username;
+                    user.bitbucket.token = accessToken;
+                    user.bitbucket.name = profile.displayName;
+                    user.bitbucket.email = profile.emails[0].value;
+
+                    user.save(function (err) {
+                        if (err) throw err;
+                        return done(null, user);
+                    });
+                } else {
+                    //If the token is different, let's change it!
+                    if (user.bitbucket.token != accessToken) {
+                        user.bitbucket.token = accessToken;
+                        user.save(function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                    //We check if we had a empty email. If empty, let's set it to a possible new value
+                    if (user.bitbucket.email == null || user.bitbucket.email != profile.emails[0].value) {
+                        user.bitbucket.email = profile.emails[0].value;
+                        user.save(function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                    done(null, user);
+                }
+            });
+        }
+    ));
+
+    // =========================================================================
     // LOCAL SIGNUP ============================================================
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup

@@ -68,4 +68,11 @@ router.get('/login/google/callback', passport.authenticate('google', { failureRe
     res.redirect('/');
 });
 
+app.get('/login/bitbucket',
+    passport.authenticate('bitbucket'));
+
+app.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
 module.exports = router;

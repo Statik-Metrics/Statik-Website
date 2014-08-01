@@ -87,4 +87,32 @@ router.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { fai
         // Successful authentication, redirect home.
         res.redirect('/');
     });
+
+
+router.get('/username', ensureAuthenticated, function(req,res) {
+    if (req.user.username != null) {
+        redirect('/');
+    } else {
+        res.render('username', {title: 'Statik - Username configuration'});
+    }
+});
+
+router.post('/username', ensureAuthenticated,  function(req,res) {
+   if (req.user.username != null) {
+       redirect('/');
+   }  else {
+
+   }
+});
+
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    req.flash('error', 'You need to be logged in!');
+    res.redirect('/login')
+}
 module.exports = router;

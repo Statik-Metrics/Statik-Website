@@ -43,28 +43,22 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           .login-form-links.link1
             h4.blue Sign in using other accounts
             hr
-            a.btn.btn-danger.btn-block(href='/users/login/google')
-              .row
-                .col-md-1.col-md-offset-1
-                  span.fa.fa-google
-                .col-md-8
-                  | Google
+            a.btn.btn-danger.btn-block.btn-labeled(href='/users/login/google')
+              span.btn-label
+                i.fa.fa-google
+              | Google
             br
             .row
               .col-md-6
-                a.btn.btn-default.btn-block(href='/users/login/github')
-                  .row
-                    .col-md-2.col-md-offset-1
-                      span.fa.fa-github
-                    .col-md-8
-                      | Github
+                a.btn.btn-inverse.btn-block.btn-labeled(href='/users/login/github')
+                  span.btn-label
+                    i.fa.fa-github
+                  | Github
               .col-md-6
-                a.btn.btn-info.btn-block(href='/users/login/bitbucket')
-                  .row
-                    .col-md-2.col-md-offset-1
-                      span.fa.fa-bitbucket
-                    .col-md-8
-                      | Bitbucket
+                a.btn.btn-info.btn-block.btn-labeled(href='/users/login/bitbucket')
+                  span.btn-label
+                    i.fa.fa-bitbucket
+                  | Bitbucket
     script(src='http://codefeed.in.iis2103.shared-servers.com/eternityForms/js/jquery-1.9.1.js')
     script(src='http://codefeed.in.iis2103.shared-servers.com/eternityForms/js/jquery.icheck.js')
     script(type='text/javascript').

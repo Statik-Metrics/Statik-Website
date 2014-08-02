@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('index', { title: 'Statik', numberOfPlugins: 932, numberOfServers: 150, 'flashsuccess': req.flash('success'), 'flasherror': req.flash('error') }); //TODO : Valid numbers when the API is built
+    res.render('index', { title: 'Statik', numberOfPlugins: 932, numberOfServers: 150 }); //TODO : Valid numbers when the API is built
 });
 
 router.get('/about', function(req, res) {

@@ -9,11 +9,12 @@ var User = require('../models/user');
 
 router.get('/signup', function(req,res) {
    //console.log('FLASH:' + req.flash('signupMessage'));
-   res.render('signup', {'pretty': true, 'signupMessage': req.flash('signupMessage')});
+   res.render('signup');
 });
 
 
 // process the signup form
+//TODO Some kind of password confirmation (Atm the password confirmation field isn't checked)
 router.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/users/username', // redirect to the secure profile section
     failureRedirect : '/users/signup', // redirect back to the signup page if there is an error
@@ -35,7 +36,6 @@ router.get('/passwordreset', function(req,res) {
 });
 
 router.get('/confirm/:confirmKey', function(req,res) {
-    console.log(req.params.confirmKey);
     User.findOne({'local.confirmKey': req.params.confirmKey, 'enabled': false}, function (err,user) {
         if (err) throw err;
 
@@ -75,10 +75,14 @@ router.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { fai
         res.redirect('/');
     });
 
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
 
 router.get('/username', ensureAuthenticated, function(req,res) {
     if (req.user.username != null) {
-        redirect('/');
+        res.redirect('/');
     } else {
         res.render('username', {title: 'Statik - Username configuration'});
     }
@@ -86,9 +90,25 @@ router.get('/username', ensureAuthenticated, function(req,res) {
 
 router.post('/username', ensureAuthenticated,  function(req,res) {
    if (req.user.username != null) {
-       redirect('/');
+       res.redirect('/');
    }  else {
+        if (req.body.username != null && req.body.username != '') {
+            User.findOne({'username': req.body.username}, function (err, user) {
+                if (err) throw err;
 
+                if (user) {
+                    req.flash('error', 'Username already taken!');
+                    res.redirect('/users/username');
+                } else {
+                    req.user.username = req.body.username;
+                    req.user.save(function(err) {
+                        if (err) throw err;
+                        req.flash('success', 'Username saved! Welcome ' + req.body.username + '!');
+                        res.redirect('/');
+                    });
+                }
+            });
+        }
    }
 });
 
@@ -100,6 +120,6 @@ router.post('/username', ensureAuthenticated,  function(req,res) {
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
     req.flash('error', 'You need to be logged in!');
-    res.redirect('/login')
+    res.redirect('/users/login')
 }
 module.exports = router;

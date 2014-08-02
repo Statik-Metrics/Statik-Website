@@ -1,64 +1,52 @@
-doctype html
-html(xmlns='http://www.w3.org/1999/xhtml')
-  head
-    title Login - Statik
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='/stylesheets/login.css', rel='stylesheet')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/app.css')
-    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', rel='stylesheet')
-    link(href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css', rel='stylesheet')
-    link(href='http://fonts.googleapis.com/css?family=Roboto:400,300', rel='stylesheet')
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js')
-  body.eternity-form(style='background-color:#1d1d1d')
-    section(data-panel='first', style='padding-top:50px')
-      .container
-        .login-form-section
-          .login-content.animated.fadeIn
-            form(method='POST')
-              .section-title
-                h3 Statik - Login
-                hr
-                p
-                  a(href='/users/passwordreset/')
-                    span.pull-left.text-muted Forgot Password
-                  a(href='/users/signup/')
-                    span.pull-right.text-muted Register
-                br
-                hr
-              .textbox-wrap
-                .input-group
-                  span.input-group-addon
-                    i.fa.fa-envelope
-                  input.form-control(type='text', required='', name='email', placeholder='Email Address')
-              .textbox-wrap
-                .input-group
-                  span.input-group-addon
-                    i.fa.fa-key
-                  input.form-control(type='password', required='', name='password', placeholder='Password')
-              .login-form-action.clearfix
-                button.btn.btn-success.pull-right(type='submit')
-                  | Login &nbsp;
-                  i.fa.fa-chevron-right
-          .login-form-links.animated.fadeIn
-            h4.blue Sign in using other accounts
+extends layouts/login_layout
+block content
+  .container
+    .login-form-section
+      .login-content.animated.fadeIn
+        form(method='POST')
+          .section-title
+            h3 Statik - Login
             hr
-            a.btn.btn-danger.btn-block.btn-labeled(href='/users/login/google')
-              span.btn-label
-                i.fa.fa-google
-              | Google
+            p
+              a(href='/users/passwordreset/')
+                span.pull-left.text-muted Forgot Password
+              a(href='/users/signup/')
+                span.pull-right.text-muted Register
             br
-            .row
-              .col-md-6
-                a.btn.btn-inverse.btn-block.btn-labeled(href='/users/login/github')
-                  span.btn-label
-                    i.fa.fa-github
-                  | Github
-              .col-md-6
-                a.btn.btn-info.btn-block.btn-labeled(href='/users/login/bitbucket')
-                  span.btn-label
-                    i.fa.fa-bitbucket
-                  | Bitbucket
-    script(src='http://codefeed.in.iis2103.shared-servers.com/eternityForms/js/jquery-1.9.1.js')
-    script(src='http://codefeed.in.iis2103.shared-servers.com/eternityForms/js/jquery.icheck.js')
-    script(src='/js/login.js')
+            hr
+          .textbox-wrap
+            .input-group
+              span.input-group-addon
+                i.fa.fa-envelope
+              input.form-control(type='text', required='', name='email', placeholder='Email Address')
+          .textbox-wrap
+            .input-group
+              span.input-group-addon
+                i.fa.fa-key
+              input.form-control(type='password', required='', name='password', placeholder='Password')
+          .login-form-action.clearfix
+            a.btn.btn-primary.pull-left(href='/')
+                i.fa.fa-chevron-left
+                | &nbsp; Back
+            button.btn.btn-success.pull-right(type='submit')
+                | Login &nbsp;
+                i.fa.fa-chevron-right
+      .login-form-links.animated.fadeIn
+        h4.blue Sign in using other accounts
+        hr
+        a.btn.btn-danger.btn-block.btn-labeled(href='/users/login/google')
+          span.btn-label
+            i.fa.fa-google
+          | Google
+        br
+        .row
+          .col-md-6
+            a.btn.btn-inverse.btn-block.btn-labeled(href='/users/login/github')
+              span.btn-label
+                i.fa.fa-github
+              | Github
+          .col-md-6
+            a.btn.btn-info.btn-block.btn-labeled(href='/users/login/bitbucket')
+              span.btn-label
+                i.fa.fa-bitbucket
+              | Bitbucket

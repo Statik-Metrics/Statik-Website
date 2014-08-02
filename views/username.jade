@@ -1,0 +1,22 @@
+extends layouts/login_layout
+block content
+    .container
+        if error != ''
+            div.alert.alert-danger(role='alert') #{error}
+        .login-form-section
+            .login-content.animated.fadeIn
+                form(action='/users/username', method='POST')
+                    .section-title
+                        h3 Statik - Set a username
+                        hr
+                    .textbox-wrap
+                        .input-group
+                            span.input-group-addon
+                                i.fa.fa-user
+                            input.form-control(type='username', required='', name='username', placeholder='Username')
+                    .login-form-links.animated.fadeIn
+                        .clearfix
+                            button.btn.btn-success.pull-right(type='submit')
+                                | Set username &nbsp;
+                                i.fa.fa-chevron-right
+                                                        

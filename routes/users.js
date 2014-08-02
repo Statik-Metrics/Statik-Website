@@ -55,14 +55,14 @@ router.get('/confirm/:confirmKey', function(req,res) {
 })
 router.get('/login/github', passport.authenticate('github'));
 
-router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login'}), function(req,res) {
+router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login', successRedirect: '/users/username'}), function(req,res) {
     //Auth success
     res.redirect('/');
 });
 
 router.get('/login/google', passport.authenticate('google'));
 
-router.get('/login/google/callback', passport.authenticate('google', { failureReditect: '/login'}), function(req,res) {
+router.get('/login/google/callback', passport.authenticate('google', { failureReditect: '/login', successRedirect: '/users/username'}), function(req,res) {
     //Auth success
     res.redirect('/');
 });
@@ -70,7 +70,7 @@ router.get('/login/google/callback', passport.authenticate('google', { failureRe
 router.get('/login/bitbucket',
     passport.authenticate('bitbucket'));
 
-router.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), function(req, res) {
+router.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login', successRedirect: '/users/username' }), function(req, res) {
         // Successful authentication, redirect home.
         res.redirect('/');
     });

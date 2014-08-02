@@ -247,7 +247,7 @@ module.exports = function(passport) {
                                 throw err;
                             mg.sendText('noreply@statik.io', email, 'Password confirmation',
                                     "Welcome to Statik.io! \n" +
-                                    "To confirm your account, please click this link: http://statik.io/users/confirm/" + newUser.local.confirmKey +
+                                    "To confirm your account, please click this link: http://dev.statik.io/users/confirm/" + newUser.local.confirmKey +
                                     "\n\n" +
                                     "Statik.io Staff");
                             return done(null, newUser, req.flash('success', 'To be able to add plugins on the website, you will need to confirm your email! You should receive a email in the next 5 minutes.'));
@@ -283,7 +283,7 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
                 // all is well, return successful user
-                return done(null, user);
+                return done(null, user, req.flash('success', 'Logged in!'));
             });
 
     }));

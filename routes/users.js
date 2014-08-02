@@ -15,7 +15,7 @@ router.get('/signup', function(req,res) {
 
 // process the signup form
 router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/', // redirect to the secure profile section
+    successRedirect : '/users/username', // redirect to the secure profile section
     failureRedirect : '/users/signup', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
@@ -24,13 +24,11 @@ router.get('/login', function(req,res) {
     res.render('login', { title: 'Statik - Login' });
 });
 
-router.post('/login', function(req,res) {
-    passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/login',
+router.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/users/username',
+        failureRedirect: '/users/login',
         failureFlash: 'true'
-    });
-});
+}));
 
 router.get('/passwordreset', function(req,res) {
    res.render('passwordreset');

@@ -37,17 +37,17 @@ html(lang='en')
       aside.aside
         nav.sidebar
           ul.nav
-            li
-              .user-block
-                .user-block-picture
-                    if (user != undefined && user.selectedEmail != undefined)
-                        img.img-thumbnail.img-circle(src=user.selectedEmail, alt='Avatar', width='60', height='60')
-                    else
-                        img.img-thumbnail.img-circle(src='/img/demoUser.jpg', alt='Avatar', width='60', height='60')
-                .user-block-info
-                    if user != undefined
-                        span.user-block-name.item-text #{ user.username }
-
+            if user != undefined
+                li
+                  .user-block
+                    .user-block-picture
+                        if (user != undefined && user.selectedEmail != undefined)
+                            img.img-thumbnail.img-circle(src=user.selectedEmail, alt='Avatar', width='60', height='60')
+                        else
+                            img.img-thumbnail.img-circle(src='/img/demoUser.jpg', alt='Avatar', width='60', height='60')
+                    .user-block-info
+                        if user != undefined
+                            span.user-block-name.item-text #{ user.username }
             li
               a.no-submenu(href='/')
                 em.fa.fa-home
@@ -86,7 +86,14 @@ html(lang='en')
                     li
                         a.no-submenu(href='/users/logout', data-toggle='')
                             span.item-text Logout
-            li &nbsp;
+                else
+                    li
+                        a.no-submenu(href='/users/login', data-toggle='')
+                            span.item-text Login
+                    li
+                        a.no-submenu(href='/users/signup', data-toggle='')
+                            span.item-text Sign-up
+                li &nbsp;
             li &nbsp;
             li
               a.no-submenu(href='/api')

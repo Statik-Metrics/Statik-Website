@@ -245,7 +245,7 @@ module.exports = function(passport) {
                         newUser.save(function (err) {
                             if (err)
                                 throw err;
-                            mg.sendText('noreply@statik.io', email, 'Password confirmation',
+                            mg.sendText('noreply@statik.io', email, 'Account confirmation',
                                     "Welcome to Statik.io! \n" +
                                     "To confirm your account, please click this link: http://dev.statik.io/users/confirm/" + newUser.local.confirmKey +
                                     "\n\n" +

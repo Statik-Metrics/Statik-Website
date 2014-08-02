@@ -11,6 +11,10 @@ var request = require('request');
 var Chance = require('chance'),
     chance = new Chance();
 
+//Email setup
+var Mailgun = require('mailgun').Mailgun;
+var mg = new Mailgun(configuration.MAILGUN_API_KEY);
+
 var User = require('../models/user');
 
 // expose this function to our app using module.exports
@@ -236,12 +240,17 @@ module.exports = function(passport) {
                         // set the user's local credentials
                         newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
-                        newUser.local.resetKey = chance.guid();
+                        newUser.local.confirmKey = chance.guid();
                         // save the user
                         newUser.save(function (err) {
                             if (err)
                                 throw err;
-                            return done(null, newUser);
+                            mg.sendText('noreply@statik.io', email, 'Password confirmation',
+                                    "Welcome to Statik.io! \n" +
+                                    "To confirm your account, please click this link: http://statik.io/users/confirm/" + newUser.local.confirmKey +
+                                    "\n\n" +
+                                    "Statik.io Staff");
+                            return done(null, newUser, req.flash('success', 'To be able to add plugins on the website, you will need to confirm your email! You should receive a email in the next 5 minutes.'));
                         });
                     }
 

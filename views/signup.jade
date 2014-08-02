@@ -13,9 +13,11 @@ html(xmlns='http://www.w3.org/1999/xhtml')
   body.eternity-form(style='background-color:#1d1d1d')
     section(data-panel='first', style='padding-top:50px')
       .container
+         if signupMessage != ''
+            div.alert.alert-danger(role='alert') #{signupMessage}
         .login-form-section
           .login-content.animated.fadeIn
-            form
+            form(action='/users/signup', method='POST')
               .section-title
                 h3 Statik - Register
                 hr
@@ -34,14 +36,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   span.input-group-addon
                     i.fa.fa-key
                   input.form-control(type='password', required='', name='confirmPassword', placeholder='Confirm Password')
-          .login-form-links.animated.fadeIn
-            .clearfix
-              a.btn.btn-primary.pull-left(href='/users/login/')
-                i.fa.fa-chevron-left
-                |  &nbsp; Back to Login
-              button.btn.btn-success.pull-right(type='submit')
-                | Register &nbsp; 
-                i.fa.fa-chevron-right
+              .login-form-links.animated.fadeIn
+                .clearfix
+                  a.btn.btn-primary.pull-left(href='/users/login/')
+                    i.fa.fa-chevron-left
+                    |  &nbsp; Back to Login
+                  button.btn.btn-success.pull-right(type='submit')
+                    | Register &nbsp;
+                    i.fa.fa-chevron-right
     script(src='http://codefeed.in.iis2103.shared-servers.com/eternityForms/js/jquery-1.9.1.js')
     script(src='http://codefeed.in.iis2103.shared-servers.com/eternityForms/js/jquery.icheck.js')
     script(src='/js/login.js')

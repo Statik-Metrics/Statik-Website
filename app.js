@@ -11,9 +11,6 @@ var validator = require('express-validator');
 var flash = require('connect-flash');
 var passport = require('passport');
 var configuration = require('./config/config.js');
-//Email setup
-var Mailgun = require('mailgun').Mailgun;
-var mg = new Mailgun(process.env.MAILGUN_API_KEY);
 
 
 var app = express();

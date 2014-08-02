@@ -96,6 +96,14 @@ html(lang='en')
                 a.btn.btn-link(target='_blank', href='http://webchat.esper.net/?channels=statik', data-toggle='tooltip', data-title='IRC')
                   em.fa.fa-weixin.fa-2x.text-muted
       section.main-content
+        if flashsuccess != ''
+            div.alert.alert-success(role='alert')
+                b Success!
+                | #{flashsuccess}
+        if flasherror != ''
+            div.alert.alert-danger(role='alert')
+                b Error!
+                | #{flasherror}
         block content
         
       .footer

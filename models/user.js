@@ -10,7 +10,8 @@ var userSchema = new Schema({
     local: {
         email: {type: String},
         password: {type: String},
-        resetKey: {type: String}
+        confirmKey: {type: String},
+        resetKey: {type: String}
     },
     github: {
         id: {type: String},

@@ -9,7 +9,7 @@ var User = require('../models/user');
 
 router.get('/signup', function(req,res) {
    //console.log('FLASH:' + req.flash('signupMessage'));
-   res.render('signup');
+   res.render('signup', {title: 'Statik - Signup'});
 });
 
 
@@ -32,7 +32,7 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/passwordreset', function(req,res) {
-   res.render('passwordreset');
+   res.render('passwordreset', {title: 'Statik - Password Reset'});
 });
 
 router.get('/confirm/:confirmKey', function(req,res) {
@@ -55,25 +55,16 @@ router.get('/confirm/:confirmKey', function(req,res) {
 })
 router.get('/login/github', passport.authenticate('github'));
 
-router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login', successRedirect: '/users/username'}), function(req,res) {
-    //Auth success
-    res.redirect('/');
-});
+router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login', successRedirect: '/users/username'}));
 
 router.get('/login/google', passport.authenticate('google'));
 
-router.get('/login/google/callback', passport.authenticate('google', { failureReditect: '/login', successRedirect: '/users/username'}), function(req,res) {
-    //Auth success
-    res.redirect('/');
-});
+router.get('/login/google/callback', passport.authenticate('google', { failureReditect: '/login', successRedirect: '/users/username'}));
 
 router.get('/login/bitbucket',
     passport.authenticate('bitbucket'));
 
-router.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login', successRedirect: '/users/username' }), function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-    });
+router.get('/login/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login', successRedirect: '/users/username' }));
 
 router.get('/logout', function(req, res) {
     req.logout();

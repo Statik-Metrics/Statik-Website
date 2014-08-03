@@ -55,11 +55,11 @@ router.get('/confirm/:confirmKey', function(req,res) {
 })
 router.get('/login/github', passport.authenticate('github'));
 
-router.get('/login/github/callback', passport.authenticate('github', { failureReditect: '/login', successRedirect: '/users/username'}));
+router.get('/login/github/callback', passport.authenticate('github', { failureRedirect: '/login', successRedirect: '/users/username'}));
 
 router.get('/login/google', passport.authenticate('google'));
 
-router.get('/login/google/callback', passport.authenticate('google', { failureReditect: '/login', successRedirect: '/users/username'}));
+router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login', successRedirect: '/users/username'}));
 
 router.get('/login/bitbucket',
     passport.authenticate('bitbucket'));

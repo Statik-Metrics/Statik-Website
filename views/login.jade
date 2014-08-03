@@ -1,6 +1,8 @@
 extends layouts/login_layout
 block content
   .container
+    if error != ''
+        div.alert.alert-danger(role='alert') #{error}
     .login-form-section
       .login-content.animated.fadeIn
         form(method='POST')

@@ -11,7 +11,7 @@ var validator = require('express-validator');
 var flash = require('connect-flash');
 var passport = require('passport');
 var configuration = require('./config/config.js');
-
+var md5 = require('MD5');
 
 var app = express();
 mongoose.connect(configuration.mongoUri);
@@ -46,6 +46,11 @@ app.use(function(req, res, next) {
     res.locals.user = req.user;
     res.locals.error = req.flash('error');
     res.locals.success = req.flash('success');
+    if (req.user != undefined && req.user.selectedEmail != undefined) {
+        res.locals.gravatar = 'http://www.gravatar.com/avatar/' +md5(req.user.selectedEmail);
+    } else {
+        res.locals.gravatar = 'http://www.gravatar.com/avatar/00000000000000000';
+    }
     next();
 });
 
@@ -66,6 +71,7 @@ if (log) {
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/plugins', require('./routes/plugin'));
+app.use('/ucp', require('./routes/ucp'));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -97,15 +103,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed.  Otherwise, the user will be redirected to the
-//   login page.
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    res.redirect('/login')
-}
 
 module.exports = app;

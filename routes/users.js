@@ -28,7 +28,7 @@ router.get('/login', function(req,res) {
 router.post('/login', passport.authenticate('local-login', {
         successRedirect: '/users/username',
         failureRedirect: '/users/login',
-        failureFlash: 'true'
+        failureFlash: true
 }));
 
 router.get('/passwordreset', function(req,res) {

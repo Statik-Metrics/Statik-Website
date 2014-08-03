@@ -2,6 +2,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt-nodejs');
 
+var pluginSchema = new Schema({
+    uuid: {type: String},
+    name: {type: String}
+});
 var userSchema = new Schema({
 
     username: {type: String, unique: true }, //Created on first login in the system
@@ -28,7 +32,7 @@ var userSchema = new Schema({
         token: {type: String},
         email: {type: String}
     },
-    plugins: [String],
+    plugins: [pluginSchema],
     group: {type: String, default: 'user'}
 });
 

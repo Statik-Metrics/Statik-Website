@@ -41,8 +41,8 @@ html(lang='en')
                 li
                   .user-block
                     .user-block-picture
-                        if (user != undefined && user.selectedEmail != undefined)
-                            img.img-thumbnail.img-circle(src=user.selectedEmail, alt='Avatar', width='60', height='60')
+                        if (gravatar != undefined)
+                            img.img-thumbnail.img-circle(src=gravatar, alt='Avatar', width='60', height='60')
                         else
                             img.img-thumbnail.img-circle(src='/img/demoUser.jpg', alt='Avatar', width='60', height='60')
                     .user-block-info
@@ -81,8 +81,11 @@ html(lang='en')
               ul.nav.collapse
                 if user != undefined
                     li
-                        a.no-submenu(href='/ucp/plugins', data-toggle='')
-                            span.item-text List my plugins
+                        a.no-submenu(href='/ucp', data-toggle='')
+                            span.item-text My plugin list
+                    li
+                        a.no-submenu(href='/ucp/settings', data-toggle='')
+                            span.item-text Settings
                     li
                         a.no-submenu(href='/users/logout', data-toggle='')
                             span.item-text Logout

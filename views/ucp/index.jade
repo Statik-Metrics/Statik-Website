@@ -1,0 +1,17 @@
+extends ../layouts/layout
+block title
+    |Statik
+block content
+    .row
+        .col-lg-12
+            table.table-stripped
+                thead
+                    tr
+                        th Plugin Name
+                        th UUID
+                tbody
+                    each item in user.plugins
+                        tr
+                            th
+                                a(href='/ucp/plugin/#{item.uuid}') #{item.name}
+                            th #{item.uuid}

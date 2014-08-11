@@ -17,3 +17,5 @@ In order to contribute to the site, you'll want to setup a development server. F
 * Visit [http://localhost:3000](http://localhost:3000) in your browser
 
 You can choose an alternative port by setting the PORT environmental variable. Running something like `PORT=8080 node server.js` should work.
+
+Alternatively, if you'd like a ready-made development environment you could look into [this](https://github.com/markdunphy/node-mongo-vagrant) vagrant box.

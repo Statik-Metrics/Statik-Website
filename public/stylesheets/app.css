@@ -1,5 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400italic,400,700);
-@import url(../fonts/Candy_Script.ttf);
+@font-face {
+  font-family: 'Candy Script';
+  src: url('../fonts/Candy_Script.ttf') format('truetype');
+}
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
 /**
  * HUMAN FREE VERSION - Bootstrap Dashboard

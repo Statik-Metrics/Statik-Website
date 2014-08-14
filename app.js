@@ -66,6 +66,13 @@ if (log) {
     console.log("Using stdout for logging");
 }
 
+//CSP
+
+app.get('/*',function(req, res, next) {
+    var csp = "default-src 'none'; script-src 'self' data: cdnjs.cloudflare.com cdn.jsdelivr.net; object-src 'self'; style-src 'self' cdnjs.cloudflare.com maxcdn.bootstrapcdn.com fonts.googleapis.com 'unsafe-inline'; img-src 'self'; media-src 'self'; frame-src 'self'; font-src 'self' cdnjs.cloudflare.com maxcdn.bootstrapcdn.com fonts.googleapis.com fonts.gstatic.com; connect-src 'self'";
+    res.header('Content-Security-Policy' , csp);
+    next();
+});
 
 //We load the routes
 app.use('/', require('./routes/index'));
@@ -92,6 +99,7 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
+    app.locals.pretty = true;
 }
 
 // production error handler

@@ -26,7 +26,6 @@ db.once('open', function callback() {
 
 require('./config/passport')(passport); // pass passport for configuration
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -40,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( {
     secret: configuration.COOKIE_KEY,
     //cookie: { domain:'.statik.io', path: '/' },
-    store: new RedisStore(require('redis-url').connect(configuration.redisUri))
+    store: new RedisStore({url: configuration.redisUri})
 }));
 
 app.use(passport.initialize());

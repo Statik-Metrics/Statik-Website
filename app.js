@@ -12,7 +12,7 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var configuration = require('./config/config.js');
 var md5 = require('MD5');
-
+var MongoStore = require('connect-mongostore')(session);
 var app = express();
 mongoose.connect(configuration.mongoUri);
 var db = mongoose.connection;
@@ -37,7 +37,12 @@ app.use(bodyParser.urlencoded());
 app.use(validator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session( { secret: configuration.COOKIE_KEY}));
+app.use(session( {
+    secret: configuration.COOKIE_KEY,
+    cookie: { domain:'.statik.io' },
+    store: new MongoStore(configuration.mongoUri)
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

@@ -12,7 +12,7 @@ var flash = require('connect-flash');
 var passport = require('passport');
 var configuration = require('./config/config.js');
 var md5 = require('MD5');
-var MongoStore = require('connect-mongostore')(session);
+var RedisStore = require('connect-redis')(session);
 var app = express();
 mongoose.connect(configuration.mongoUri);
 var db = mongoose.connection;
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( {
     secret: configuration.COOKIE_KEY,
     //cookie: { domain:'.statik.io', path: '/' },
-    //store: new MongoStore(configuration.mongoUri)
+    store: new RedisStore(require('redis-url').connect(configuration.redisUri))
 }));
 
 app.use(passport.initialize());

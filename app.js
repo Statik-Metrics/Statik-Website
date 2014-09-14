@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session( {
     secret: configuration.COOKIE_KEY,
-    //cookie: { domain:'.statik.io', path: '/' },
+    cookie: { domain:'.statik.io', path: '/' },
     store: new RedisStore({url: configuration.redisUri})
 }));
 

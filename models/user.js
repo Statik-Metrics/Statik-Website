@@ -8,7 +8,7 @@ var pluginSchema = new Schema({
 });
 var userSchema = new Schema({
 
-    username: {type: String, unique: true }, //Created on first login in the system
+    username: {type: String }, //Created on first login in the system
     selectedEmail: {type: String }, //This is to select where we want to send informational emails
     enabled: {type: Boolean, default: false},
     local: {

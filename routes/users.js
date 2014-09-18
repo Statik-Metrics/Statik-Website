@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var app = require('../app');
+var config = require('../config/config.js');
 var passport = require('passport');
+var crypto = require('crypto');
 var Chance = require('chance'),
     chance = new Chance();
 
@@ -103,6 +105,58 @@ router.post('/username', ensureAuthenticated,  function(req,res) {
    }
 });
 
+router.get('/sso', ensureAuthenticated, function(req,res) {
+    var sso = req.query.sso;
+    decrypt(sso, config.CRYPT_KEY, function (decoded) {
+        //Format sessionID
+        encrypt(decoded + "," + req.user.id + "," + req.user.username + "," + req.user.selectedEmail + "," + req.user.group, config.CRYPT_KEY, function(encoded) {
+            res.redirect("http://support.statik.io/login/?auth="+encoded);
+        });
+    });
+})
+
+
+var encrypt = function (input, password, callback) {
+    var m = crypto.createHash('md5');
+    m.update(password)
+    var key = m.digest('hex');
+
+    m = crypto.createHash('md5');
+    m.update(password + key)
+    var iv = m.digest('hex');
+
+    var data = new Buffer(input, 'utf8').toString('binary');
+
+    var cipher = crypto.createCipheriv('aes-256-cbc', key, iv.slice(0,16));
+    var encrypted = cipher.update(data, 'binary') + cipher.final('binary');
+    var encoded = new Buffer(encrypted, 'binary').toString('base64');
+
+    callback(encoded);
+};
+
+var decrypt = function (input, password, callback) {
+    // Convert urlsafe base64 to normal base64
+    var input = input.replace(/\-/g, '+').replace(/_/g, '/');
+    // Convert from base64 to binary string
+    var edata = new Buffer(input, 'base64').toString('binary')
+
+    // Create key from password
+    var m = crypto.createHash('md5');
+    m.update(password)
+    var key = m.digest('hex');
+
+    // Create iv from password and key
+    m = crypto.createHash('md5');
+    m.update(password + key)
+    var iv = m.digest('hex');
+
+    // Decipher encrypted data
+    var decipher = crypto.createDecipheriv('aes-256-cbc', key, iv.slice(0,16));
+    var decrypted = decipher.update(edata, 'binary') + decipher.final('binary');
+    var plaintext = new Buffer(decrypted, 'binary').toString('utf8');
+
+    callback(plaintext);
+};
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
 //   the request is authenticated (typically via a persistent login session),

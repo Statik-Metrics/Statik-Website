@@ -14,5 +14,6 @@ module.exports = {
     'mongoUri' : process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test',
     'redisUri' : process.env.REDISTOGO_URL || 'redis://localhost:6379',
     'COOKIE_KEY' : process.env.COOKIE_KEY || '9208efyg98wgc987stdc97sgdc',
-    'MAILGUN_API_KEY' : process.env.MAILGUN_API_KEY || '09y39283oh9ds8hf89sdf'
+    'MAILGUN_API_KEY' : process.env.MAILGUN_API_KEY || '09y39283oh9ds8hf89sdf',
+    'CRYPT_KEY' : process.env.CRYPT_KEY || 'foew9sgd8fc7sdgc'
 };

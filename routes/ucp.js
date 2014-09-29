@@ -30,7 +30,7 @@ router.get('/settings', ensureAuthenticated, function(req,res) {
             emails[++i] = req.user.google.email;
         }
     }
-    res.render('ucp/settings', {title: 'Statik - Account settings', 'emails': emails});
+    res.render('ucp/settings', {title: 'Statik - Account settings', 'emails': emails, csrfToken: req.csrfToken()});
 });
 
 router.post('/email', ensureAuthenticated, function(req,res) {

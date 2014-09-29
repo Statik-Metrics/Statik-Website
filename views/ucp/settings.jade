@@ -21,6 +21,7 @@ block content
                                 else
                                     option #{item}
                 br
+                input(type='hidden' name='_csrf' value='#{csrfToken}')
                 .login-form-links.animated.fadeIn
                     .clearfix
                         button.btn.btn-success.pull-right(type='submit')

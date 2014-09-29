@@ -24,6 +24,7 @@ block content
               span.input-group-addon
                 i.fa.fa-key
               input.form-control(type='password', required='', name='confirmPassword', placeholder='Confirm Password')
+          input(type='hidden' name='_csrf' value='#{csrfToken}')
           .login-form-links.animated.fadeIn
             .clearfix
               a.btn.btn-primary.pull-left(href='/users/login/')

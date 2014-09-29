@@ -11,7 +11,7 @@ var User = require('../models/user');
 
 router.get('/signup', function(req,res) {
    //console.log('FLASH:' + req.flash('signupMessage'));
-   res.render('signup', {title: 'Statik - Signup'});
+   res.render('signup', {title: 'Statik - Signup', csrfToken: req.csrfToken()});
 });
 
 
@@ -34,7 +34,7 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get('/passwordreset', function(req,res) {
-   res.render('passwordreset', {title: 'Statik - Password Reset'});
+   res.render('passwordreset', {title: 'Statik - Password Reset', csrfToken: req.csrfToken()});
 });
 
 router.get('/confirm/:confirmKey', function(req,res) {
@@ -77,7 +77,7 @@ router.get('/username', ensureAuthenticated, function(req,res) {
     if (req.user.username != null) {
         res.redirect('/');
     } else {
-        res.render('username', {title: 'Statik - Username configuration'});
+        res.render('username', {title: 'Statik - Username configuration', csrfToken: req.csrfToken()});
     }
 });
 

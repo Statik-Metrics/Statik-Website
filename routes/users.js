@@ -24,7 +24,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 }));
 
 router.get('/login', function(req,res) {
-    res.render('login', { title: 'Statik - Login' });
+    res.render('login', { title: 'Statik - Login', csrfToken: req.csrfToken() });
 });
 
 router.post('/login', passport.authenticate('local-login', {

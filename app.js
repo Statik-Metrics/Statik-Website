@@ -13,6 +13,7 @@ var passport = require('passport');
 var configuration = require('./config/config.js');
 var md5 = require('MD5');
 var RedisStore = require('connect-redis')(session);
+var csrf = require('csurf');
 var app = express();
 mongoose.connect(configuration.mongoUri);
 var db = mongoose.connection;
@@ -45,6 +46,15 @@ app.use(session( {
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+app.use(csrf());
+
+app.use(function (err,req,res,next) {
+   if (err.code !== 'EBADCSRFTOKEN') return next(err)
+
+    res.status(403)
+    res.send('session has expired or form tampered with')
+});
 
 app.use(function(req, res, next) {
     res.locals.user = req.user;
